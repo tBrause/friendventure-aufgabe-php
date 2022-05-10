@@ -123,6 +123,13 @@ if ($clearid !== '') {
                 echo '<h3>Einkaufliste: ' . $row_basket['name'] . '</h3>';
                 $basket_id = $row_basket['id'];
 
+
+                /**
+                 * 
+                 * noch offen
+                 * 
+                 */
+
                 # Query database 'CONTENT'
                 $sql_content = "SELECT * FROM `content` WHERE `basketid` = '" . $basket_id . "' AND `done` = '0' AND  `release` = '1'";
                 $result_content = mysqli_query($conn, $sql_content);
@@ -140,7 +147,7 @@ if ($clearid !== '') {
 
                         $content_id = $row_content['id'];
                         $content_quantity = $row_content['quantity'];
-                        echo '<li>' . $content_quantity . ' x ' . $row_content['product'] . ' <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id . '&amp;inbasket=1" target="_self">erledigt &#10004;</a> <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id . '&amp;release=1" target="_self">nicht vorhanden &#10006;</a></li>';
+                        echo '<li>' . $content_quantity . ' x ' . strtoupper($row_content['product']) . ' <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id . '&amp;inbasket=1" target="_self">erledigt &#10004;</a> <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id . '&amp;release=1" target="_self">nicht vorhanden &#10006;</a></li>';
                     }
                     echo "</ul>";
                 }
@@ -149,7 +156,7 @@ if ($clearid !== '') {
 
                 /**
                  * 
-                 * content
+                 * erledigt
                  * 
                  */
 
@@ -171,7 +178,8 @@ if ($clearid !== '') {
                         $content_id_done = $row_content_done['id'];
                         $content_quantity_done = $row_content_done['quantity'];
                         $content_product_done = $row_content_done['product'];
-                        echo '<li>' . $content_quantity_done . ' x ' . $content_product_done . ' ';
+
+                        echo '<li>' . $content_quantity_done . ' x ' . strtoupper($content_product_done) . ' ';
 
                         $sql_fav = "SELECT * FROM `fav` WHERE `contentid` = '" . $content_id_done . "'";
                         $result_fav = mysqli_query($conn, $sql_fav);
@@ -216,7 +224,7 @@ if ($clearid !== '') {
                         $content_quantity_release = $row_content_release['quantity'];
                         $content_product_release = $row_content_release['product'];
                         echo '<li>';
-                        echo $content_quantity_release . ' x ' . $content_product_release . '<a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id_release . '&amp;release=2" target="_self">wieder vorhanden &#10004;</a>';
+                        echo $content_quantity_release . ' x ' . strtoupper($content_product_release) . '<a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id_release . '&amp;release=2" target="_self">wieder vorhanden &#10004;</a>';
                         #echo '<a href="index.php" target="_self">in eine andere Liste verschieben &#10132;</a>';
                         echo 'in eine andere Liste verschieben &#10132;';
                         echo '</li>';
@@ -267,14 +275,13 @@ if ($clearid !== '') {
              * 
              */
             $sql_basketsave_overview = "SELECT  
-            bs.basketid,
-            b.name AS bname 
-        FROM
-        basketsave AS bs
-        INNER JOIN basket AS b ON b.id = bs.basketid
-        ORDER BY bname";
+                bs.basketid,
+                b.name AS bname 
+            FROM
+                basketsave AS bs
+            INNER JOIN basket AS b ON b.id = bs.basketid
+            ORDER BY bname";
 
-            #$sql_basketsave_overview = "SELECT * FROM `basketsave`";
             $result_basketsave_overview = mysqli_query($conn, $sql_basketsave_overview);
             $count_basketsave_overview = mysqli_num_rows($result_basketsave_overview);
 
@@ -344,11 +351,10 @@ if ($clearid !== '') {
 
                 echo '<ul>';
                 while ($row_fav_all = mysqli_fetch_array($result_fav_all)) {
-                    echo '<li>' . $row_fav_all['product'] . ' @ ' . $row_fav_all['bname'] . ' ' . $row_fav_all['contentid'] . ' <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $row_fav_all['contentid'] . '&amp;delfav=1" target="_self">entfernen</a></li>';
+                    echo '<li>' . strtoupper($row_fav_all['product']) . ' @ ' . strtoupper($row_fav_all['bname']) . ' <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $row_fav_all['contentid'] . '&amp;delfav=1" target="_self">entfernen</a></li>';
                 }
                 echo '</ul>';
             }
-
 
             mysqli_free_result($result_fav_all);
 
