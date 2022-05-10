@@ -91,6 +91,7 @@ if ($showid !== '') {
         a {
             margin: auto;
             padding: 6px 12px;
+            text-decoration: none;
         }
 
         .delete_list_last {
@@ -154,7 +155,7 @@ if ($showid !== '') {
 
                         $content_id = $row_content['id'];
                         $content_quantity = $row_content['quantity'];
-                        echo '<li>' . $content_quantity . ' x ' . $row_content['product'] . ' <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id . '&amp;inbasket=1" target="_self">erledigt</a> <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id . '&amp;release=1" target="_self">nicht vorhanden</a></li>';
+                        echo '<li>' . $content_quantity . ' x ' . $row_content['product'] . ' <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id . '&amp;inbasket=1" target="_self">erledigt &#10004;</a> <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id . '&amp;release=1" target="_self">nicht vorhanden &#10006;</a></li>';
                     }
                     echo "</ul>";
                 }
@@ -178,7 +179,7 @@ if ($showid !== '') {
                         $content_id_done = $row_content_done['id'];
                         $content_quantity_done = $row_content_done['quantity'];
                         $content_product_done = $row_content_done['product'];
-                        echo '<li>' . $content_quantity_done . ' x ' . $content_product_done . ' <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id_done . '&amp;addfav=1" target="_self">zu Favoriten hinzuf&uuml;gen</a></li>';
+                        echo '<li>' . $content_quantity_done . ' x ' . $content_product_done . ' <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id_done . '&amp;addfav=1" target="_self" alt="zu Favoriten hinzuf&uuml;gen" title="zu Favoriten hinzuf&uuml;gen">zu Favoriten hinzuf&uuml;gen &#10084;</a></li>';
                     }
                     echo "</ul>";
                 }
@@ -202,7 +203,10 @@ if ($showid !== '') {
                         $content_id_release = $row_content_release['id'];
                         $content_quantity_release = $row_content_release['quantity'];
                         $content_product_release = $row_content_release['product'];
-                        echo '<li>' . $content_quantity_release . ' x ' . $content_product_release . ' <a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id_release . '&amp;release=2" target="_self">wieder vorhanden</a></li>';
+                        echo '<li>';
+                        echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?cid=' . $content_id_release . '&amp;release=2" target="_self">wieder vorhanden &#10004;</a>';
+                        echo '<a href="index.php" target="_self">in eine andere Liste verschieben &#10132;</a>';
+                        echo '</li>';
                     }
                     echo "</ul>";
                 }
