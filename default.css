@@ -1,0 +1,63 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1f1f1;
+}
+
+.wrapper {
+    max-width: 960px;
+    width: 80%;
+    margin: auto;
+}
+
+h3,
+H4 {
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+h3 {
+    background-color: #666;
+    color: #f1f1f1;
+    margin-top: 3em;
+}
+
+h3.subnav {
+    background-color: #999;
+    border-radius: 6px;
+}
+
+H4 {
+    background-color: #ccc;
+}
+
+a {
+    margin: auto;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+
+.delete_list_last {
+    _margin-bottom: 3em;
+}
+
+.delete_list a {
+    padding: 0;
+}
+
+.open {
+    display: block;
+    padding: 20px;
+    background-color: #fff;
+    font-style: italic;
+    _font-weight: 700;
+    letter-spacing: 0.7px;
+    border-radius: 6px;
+}
+
+.ok {
+    color: green;
+}
+
+section {
+    border-bottom: 1px solid #999;
+}
